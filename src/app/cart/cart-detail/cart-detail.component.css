@@ -1,0 +1,19 @@
+.image-resizer {
+    width: 6rem;
+    height: 8rem;
+}
+
+.quantity-bloc {
+    display: flex;
+    align-items: center;
+}
+
+.quantity {
+    margin: 0 10px;
+    font-size: 1.2rem;
+}
+
+.quantity-buttons {
+    width: 2rem;
+    height: 2rem;
+}

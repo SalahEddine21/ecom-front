@@ -1,0 +1,4 @@
+export enum QUANTITY_UPDATES {
+    INCREASE,
+    DECREASE
+}

@@ -1,0 +1,19 @@
+<header>
+    <div class="top-banner">
+        <span class="top-banner-text">Looking for the perfect gift but not sure what to buy? A gift card is the perfect
+            solution.</span>
+    </div>
+    <p-menubar [model]="items">
+        <ng-template pTemplate="start">
+            <div class="logo-and-currency">
+                <img src="../../../assets/images/shopping.png" alt="VIVI ET MARGOT" height="40" class="logo">
+            </div>
+        </ng-template>
+    
+        <ng-template pTemplate="end">
+            <div class="search-bar">
+                <p-dropdown [options]="currencies" [(ngModel)]="selectedCurrency" optionLabel="label" />
+            </div>
+        </ng-template>
+    </p-menubar>
+</header>

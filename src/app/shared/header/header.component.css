@@ -1,0 +1,44 @@
+/* Top banner */
+.top-banner {
+  background-color: #444;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Style for the active menu item */
+.active-menu-item {
+  font-weight: bold;
+  color: #4CAF50;
+  /* Customize your active color */
+}
+
+
+.top-banner-text {
+  font-size: 14px;
+}
+
+/* Menubar */
+.p-menubar {
+  background-color: #6d7d6d;
+  color: white;
+}
+
+::ng-deep .p-menubar .p-menuitem .p-menuitem-content .p-menuitem-link-active {
+  background-color: rgb(168 195 207);
+  border-radius: 0.5rem;
+}
+
+::ng-deep .p-menubar .p-menubar-start{
+  margin-right: 1rem;
+}
+
+.logo-and-currency {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  margin-left: 10px;
+  height: 40px;
+}

@@ -1,0 +1,60 @@
+/* Top banner */
+.top-banner {
+    background-color: #444;
+    color: white;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .top-banner-text {
+    font-size: 14px;
+  }
+  
+  /* Menubar */
+  .p-menubar {
+    background-color: #6d7d6d;
+    color: white;
+  }
+  
+  .p-menubar .p-menubar-root-list > li > .p-menuitem-link {
+    color: white;
+  }
+  
+  .p-menubar .p-menubar-root-list > li > .p-menuitem-link:hover {
+    background-color: #4d5d4d;
+  }
+  
+  .logo-and-currency {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    margin-left: 10px;
+    height: 40px;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-bar input {
+    width: 200px;
+  }
+
+  .align-button{
+    width: 100%;
+    height: 100%;
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .top-banner-text, .gift-card-button {
+      font-size: 12px;
+    }
+  
+    .search-bar input {
+      width: 150px;
+    }
+  }
+  
