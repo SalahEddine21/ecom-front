@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { CurrencyService } from '../services/currency.service';
 import { ExchangeRateResponse } from '../../models/exchangeRateResponse';
+import { Currency } from '../../models/currency';
 
 @Component({
   selector: 'app-header',
@@ -47,7 +48,9 @@ export class HeaderComponent implements OnInit{
 
   changeCurrency(){
     if(this.conversionRates){
-      this.currencyService.updateCurrency(this.conversionRates.rates[this.selectedCurrency.value]);
+      this.currencyService.updateCurrency(new Currency(this.selectedCurrency.value, 
+        this.conversionRates.rates[this.selectedCurrency.value]
+      ));
     }
   }
 }

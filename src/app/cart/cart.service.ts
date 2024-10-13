@@ -14,7 +14,6 @@ export class CartService {
   public cart$!: Observable<Cart>;
 
   constructor() {
-    console.log('created');
     let cart : Cart = this.getCart();
     this.cartSubject = new BehaviorSubject<Cart>(cart);
     this.cart$ = this.cartSubject.asObservable();

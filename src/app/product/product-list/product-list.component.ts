@@ -4,6 +4,8 @@ import { ProductService } from '../product.service';
 import { CartService } from '../../cart/cart.service';
 import { CartProduct } from '../../models/Cart';
 import { MessageService, SelectItem } from 'primeng/api';
+import { Currency } from '../../models/currency';
+import { CurrencyService } from '../../shared/services/currency.service';
 
 @Component({
   selector: 'app-product-list',
@@ -21,9 +23,11 @@ export class ProductListComponent implements OnInit {
   categories : String[] = [];
   sortOrder!: number;
   sortField!: string;
+  currency : Currency | undefined;
 
   constructor(private readonly productService : ProductService,
     private readonly cartService : CartService,
+    private readonly currencyService: CurrencyService,
     private readonly messageService: MessageService
   ){}
 
@@ -34,6 +38,11 @@ export class ProductListComponent implements OnInit {
     ];
     this.getAllproducts();
     this.getCategories();
+    
+    this.currencyService.currency$.subscribe(() => {
+      this.currency = this.currencyService.getCurrency();
+      console.log(this.currency);
+    });
   }
 
   getAllproducts(){

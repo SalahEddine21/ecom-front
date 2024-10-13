@@ -22,7 +22,7 @@
                     <tr>
                         <td>{{product.title}}</td>
                         <td><img [src]="product.image" [alt]="product.title" width="100" class="shadow-4 image-resizer" /></td>
-                        <td>{{product.price | currency:'USD'}}</td>
+                        <td>{{product.price | currencyConversion: currency.rate | currency: currency.key }}</td>
                         <td>{{product.category}}</td>
                         <td>
                             <div class="quantity-bloc">

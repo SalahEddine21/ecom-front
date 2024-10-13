@@ -5,6 +5,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { CurrencyService } from './services/currency.service';
+import { CurrencyConversionPipe } from './pipes/currency-conversion.pipe';
 
 
 
