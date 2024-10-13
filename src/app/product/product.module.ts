@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from '../shared/pipes/searchPipe';
 import { DropdownModule } from 'primeng/dropdown';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -34,7 +35,8 @@ import { DropdownModule } from 'primeng/dropdown';
     TagModule,
     ToastModule,
     FormsModule,
-    DropdownModule
+    DropdownModule,
+    SharedModule
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()), MessageService

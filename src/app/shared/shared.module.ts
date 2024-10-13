@@ -11,7 +11,8 @@ import { CurrencyConversionPipe } from './pipes/currency-conversion.pipe';
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    CurrencyConversionPipe
   ],
   imports: [
     CommonModule,
@@ -19,9 +20,10 @@ import { CurrencyConversionPipe } from './pipes/currency-conversion.pipe';
     DropdownModule,
     FormsModule
   ],
-  providers: [CurrencyService],
+  providers: [],
   exports : [
-    HeaderComponent
+    HeaderComponent,
+    CurrencyConversionPipe
   ]
 })
 export class SharedModule { }

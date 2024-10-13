@@ -8,6 +8,7 @@ import { QUANTITY_UPDATES } from '../../shared/utils/constantUtils';
 import { CurrencyPipe } from '@angular/common';
 import { CurrencyService } from '../../shared/services/currency.service';
 import { Currency } from '../../models/currency';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cart-detail',
@@ -24,9 +25,9 @@ export class CartDetailComponent implements OnInit{
   currency : Currency;
 
   constructor(private readonly cartService : CartService,
-    private readonly productService : ProductService,
     private readonly currencyService: CurrencyService,
-    private readonly cdr : ChangeDetectorRef
+    private readonly cdr : ChangeDetectorRef,
+    private readonly route: ActivatedRoute
   ) {
     this.currency = this.currencyService.currency;
   }
@@ -41,18 +42,13 @@ export class CartDetailComponent implements OnInit{
 
     this.currencyService.currency$.subscribe(() => {
       this.currency = this.currencyService.getCurrency();
-      console.log(this.currency);
     });
   }
 
 
   getAllproducts(){
-    this.loadingData = true;
-    this.productService.getProducts().subscribe(resp => {
-      this.allProducts = resp;
-      this.setCartProducts();      
-      this.loadingData = false;
-    })
+    this.allProducts = this.route.snapshot.data['products'];
+    this.setCartProducts();      
   }
 
   setCartProducts() {

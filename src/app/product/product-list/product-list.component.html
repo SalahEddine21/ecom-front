@@ -42,7 +42,7 @@
                                             </div>
                                         </div>
                                         <div class="flex flex-column md:align-items-end gap-5">
-                                            <span class="text-xl font-semibold text-900">{{ '$' + item.price }}</span>
+                                            <span class="text-xl font-semibold text-900">{{ item.price | currencyConversion: currency.rate | currency: currency.key }}</span>
                                             <div class="flex flex-row-reverse md:flex-row gap-2">
                                                 <p-button icon="pi pi-heart" [outlined]="true" />
                                                 <p-button icon="pi pi-shopping-cart" class="flex-auto md:flex-initial white-space-nowrap" label="Buy Now" (onClick)="addProduct(item)" />
@@ -76,7 +76,7 @@
                                             </div>
                                         </div>
                                         <div class="flex flex-column gap-4 mt-4">
-                                            <span class="text-2xl font-semibold">{{ '$' + product.price }}</span>
+                                            <span class="text-2xl font-semibold">{{ product.price | currencyConversion: currency.rate | currency: currency.key }}</span>
                                             <div class="flex gap-2">
                                                 <p-button icon="pi pi-shopping-cart" class="flex-auto md:flex-initial white-space-nowrap" label="Buy Now" (onClick)="addProduct(product)" />
                                                 <p-button icon="pi pi-heart" [outlined]="true" />

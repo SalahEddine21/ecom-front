@@ -6,14 +6,13 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
-import { CurrencyConversionPipe } from '../shared/pipes/currency-conversion.pipe';
+import { SharedModule } from '../shared/shared.module';
 
 
 
 @NgModule({
   declarations: [
-    CartDetailComponent,
-    CurrencyConversionPipe
+    CartDetailComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +20,8 @@ import { CurrencyConversionPipe } from '../shared/pipes/currency-conversion.pipe
     TableModule,
     ButtonModule,
     RatingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class CartModule { }

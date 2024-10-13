@@ -6,6 +6,7 @@ import { CartProduct } from '../../models/Cart';
 import { MessageService, SelectItem } from 'primeng/api';
 import { Currency } from '../../models/currency';
 import { CurrencyService } from '../../shared/services/currency.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -23,35 +24,34 @@ export class ProductListComponent implements OnInit {
   categories : String[] = [];
   sortOrder!: number;
   sortField!: string;
-  currency : Currency | undefined;
+  currency : Currency;
 
   constructor(private readonly productService : ProductService,
     private readonly cartService : CartService,
     private readonly currencyService: CurrencyService,
-    private readonly messageService: MessageService
-  ){}
+    private readonly messageService: MessageService,
+    private readonly route: ActivatedRoute
+  ){
+    this.currency = this.currencyService.currency;
+  }
 
   ngOnInit(): void {
     this.sortOptions = [
       { label: 'Price High to Low', value: 'desc' },
       { label: 'Price Low to High', value: 'asc' }
     ];
-    this.getAllproducts();
+    this.setProductsData();
     this.getCategories();
-    
+
     this.currencyService.currency$.subscribe(() => {
       this.currency = this.currencyService.getCurrency();
       console.log(this.currency);
     });
   }
 
-  getAllproducts(){
-    this.loadingData = true;
-    this.productService.getProducts().subscribe(resp => {
-      this.products = resp;
-      this.allProducts = this.products.slice();
-      this.loadingData = false;      
-    })
+  setProductsData(){
+    this.products = this.route.snapshot.data['products'];
+    this.allProducts = this.products.slice();
   }
 
   getCategories(){

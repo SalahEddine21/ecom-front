@@ -9,6 +9,7 @@ import { CartModule } from './cart/cart.module';
 import { CartService } from './cart/cart.service';
 import { ProductService } from './product/product.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CurrencyService } from './shared/services/currency.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SharedModule,
     CartModule
   ],
-  providers: [ProductService, CartService],
+  providers: [ProductService, CartService, CurrencyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
