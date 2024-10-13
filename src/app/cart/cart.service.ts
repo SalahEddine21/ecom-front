@@ -14,15 +14,31 @@ export class CartService {
   public cart$!: Observable<Cart>;
 
   constructor() {
-    console.log('cerated');
-    
-    this.cartSubject = new BehaviorSubject<Cart>(new Cart(1, new Date()));
+    console.log('created');
+    let cart : Cart = this.getCart();
+    this.cartSubject = new BehaviorSubject<Cart>(cart);
     this.cart$ = this.cartSubject.asObservable();
+    this.cartSubject.next(cart);
+
+    // Listen to the storage event to synchronize cart changes across tabs
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'cart' && event.newValue) {
+        let cart = JSON.parse(event.newValue);
+        this.cartSubject.next(cart);
+      }
+    });
   }
 
   getCart() : Cart{
-    // perform http query to get cart by user here
-    return this.cartSubject.getValue();
+    const cartAsString = localStorage.getItem('cart');
+    if(cartAsString){
+      return JSON.parse(cartAsString);
+    }
+    return new Cart(2, new Date());
+  }
+
+  notifyCartUpdate(cart : Cart){
+    this.cartSubject.next(cart);
   }
 
   addProduct(cartProduct : CartProduct){
@@ -30,20 +46,20 @@ export class CartService {
     let product = cart.products?.find(el => el.productId == cartProduct.productId);
     if(isNullOrUndefined(product)){
       cart.products?.push(cartProduct);
-      this.cartSubject.next(cart);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      this.notifyCartUpdate(cart);
     }
   }
 
   updateProductQty(productId : Number, updateType : QUANTITY_UPDATES){
     const cart = this.getCart();
-    const products = cart.products;
     let product = cart.products.find(product => product.productId == productId);
     if(product){
       product.quantity = updateType == QUANTITY_UPDATES.INCREASE ? 
         (product.quantity + 1) : (product.quantity - 1);
-      this.cartSubject.next(cart);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      this.notifyCartUpdate(cart);
     }
-
   }
 
   removeFromCart(productId: Number): void {
@@ -53,7 +69,8 @@ export class CartService {
       const productIndex = cart.products.indexOf(product);
       if(productIndex != -1){
         cart.products.splice(productIndex, 1);
-        this.cartSubject.next(cart);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        this.notifyCartUpdate(cart);
       }
     }
   }

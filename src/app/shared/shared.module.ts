@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { MenubarModule } from 'primeng/menubar';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
+import { CurrencyService } from './services/currency.service';
 
 
 
@@ -17,6 +18,7 @@ import { FormsModule } from '@angular/forms';
     DropdownModule,
     FormsModule
   ],
+  providers: [CurrencyService],
   exports : [
     HeaderComponent
   ]

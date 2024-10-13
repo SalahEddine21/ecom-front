@@ -11,9 +11,7 @@
         </ng-template>
     
         <ng-template pTemplate="end">
-            <div class="search-bar">
-                <p-dropdown [options]="currencies" [(ngModel)]="selectedCurrency" optionLabel="label" />
-            </div>
+            <p-dropdown [options]="currencies" [(ngModel)]="selectedCurrency" optionLabel="label" (ngModelChange)="changeCurrency()" />
         </ng-template>
     </p-menubar>
 </header>

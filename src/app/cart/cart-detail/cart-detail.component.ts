@@ -5,6 +5,8 @@ import { Product } from '../../models/product';
 import { ProductService } from '../../product/product.service';
 import { isNullOrUndefined, NOT_FOUND } from '../../shared/utils/stringUtils';
 import { QUANTITY_UPDATES } from '../../shared/utils/constantUtils';
+import { CurrencyPipe } from '@angular/common';
+import { CurrencyService } from '../../shared/services/currency.service';
 
 @Component({
   selector: 'app-cart-detail',
@@ -21,16 +23,20 @@ export class CartDetailComponent implements OnInit{
 
   constructor(private readonly cartService : CartService,
     private readonly productService : ProductService,
+    private readonly currencyService: CurrencyService,
     private readonly cdr : ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.cart = this.cartService.getCart();
     this.getAllproducts();
     this.cartService.cart$.subscribe((cartItems) => {
-      this.cart = cartItems;
+      this.cart = this.cartService.getCart();
       this.setCartProducts();
       this.cdr.detectChanges();
+    });
+
+    this.currencyService.currency$.subscribe((currencyRate) => {
+      console.log(currencyRate);
     });
   }
 

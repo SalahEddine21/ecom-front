@@ -11,13 +11,17 @@ import { TagModule } from 'primeng/tag';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { SearchPipe } from '../shared/pipes/searchPipe';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 
 @NgModule({
   declarations: [
     ProductCardComponent,
-    ProductListComponent
+    ProductListComponent,
+    SearchPipe
   ],
   imports: [
     CommonModule,
@@ -28,7 +32,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     InputTextModule,
     ButtonModule,
     TagModule,
-    ToastModule
+    ToastModule,
+    FormsModule,
+    DropdownModule
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()), MessageService

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { CurrencyService } from '../services/currency.service';
+import { ExchangeRateResponse } from '../../models/exchangeRateResponse';
 
 @Component({
   selector: 'app-header',
@@ -12,9 +14,12 @@ export class HeaderComponent implements OnInit{
   items: MenuItem[] = [];
   currencies: any[] = [];
   activeItem: string = '';
+  conversionRates : ExchangeRateResponse | undefined;
   selectedCurrency: any;
 
-  constructor(private router: Router){}
+  constructor(private readonly router: Router,
+    private readonly currencyService : CurrencyService
+  ){}
 
   ngOnInit(): void {
     this.items = [
@@ -24,18 +29,25 @@ export class HeaderComponent implements OnInit{
 
     this.activeItem = this.router.url;
 
-    // this.router.events.subscribe((event: any) => {
-    //   if (event.url) {
-    //     this.activeItem = event.url;
-    //   }
-    // });
-
     this.currencies = [
       { label: 'USD ($)', value: 'USD' },
       { label: 'EUR (€)', value: 'EUR' },
-      { label: 'GBP (£)', value: 'GBP' }
+      { label: 'MAD (DH)', value: 'MAD' }
     ];
 
     this.selectedCurrency = this.currencies[0];
+    this.getConversionRates();
+  }
+
+  getConversionRates(){
+    this.currencyService.getConversionRates().subscribe(resp => {
+      this.conversionRates = resp;
+    });
+  }
+
+  changeCurrency(){
+    if(this.conversionRates){
+      this.currencyService.updateCurrency(this.conversionRates.rates[this.selectedCurrency.value]);
+    }
   }
 }

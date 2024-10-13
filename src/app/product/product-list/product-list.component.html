@@ -1,11 +1,8 @@
-<div class="grid">
+<div class="grid" style="margin-top: 5rem;">
     <div class="col-12">
         <div class="grid flex justify-content-center">
-            <div class="col-6">
-                <input style="width: 100%;" type="text" pInputText placeholder="Search...">
-            </div>
-            <div class="col-1">
-                <button pButton icon="pi pi-search" class="align-button"></button>
+            <div class="col-7">
+                <input style="width: 100%;" type="text" pInputText placeholder="Search..." [(ngModel)]="searchText" >
             </div>
         </div>
     </div>
@@ -13,9 +10,14 @@
 <div class="grid">
     <div class="col-12">
         <div class="card">
-            <p-dataView #dv [value]="products" [layout]="layout" [rows]="5" [paginator]="true" >
+            <p-dataView #dv [value]="products | search: searchText" 
+                [layout]="layout" [rows]="6" [paginator]="true" [sortField]="sortField" [sortOrder]="sortOrder">
                     <ng-template pTemplate="header">
+                        <!-- <div class="flex flex-column md:flex-row md:justify-content-between">
+                        </div> -->
                         <div class="flex justify-content-end">
+                            <p-dropdown [options]="categories" placeholder="Filter by category" (onChange)="filterByCategory($event)" styleClass="mr-2 md:mb-0" />
+                            <p-dropdown [options]="sortOptions" placeholder="Sort By Price" (onChange)="onSortChange($event)" styleClass="mr-2 md:mb-0" />
                             <p-dataViewLayoutOptions  />
                         </div>
                     </ng-template>
@@ -60,7 +62,7 @@
                                             <img class="border-round w-full" [src]="product.image" [alt]="product.title" style="height: 100%;" />
                                         </div>
                                     </div>
-                                    <div class="pt-4">
+                                    <div class="pt-4" style="height: 13rem;">
                                         <div class="flex flex-row justify-content-between align-items-start gap-2">
                                             <div>
                                                 <span class="font-medium text-secondary text-sm">{{ product.category }}</span>
