@@ -6,13 +6,15 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { CurrencyService } from './services/currency.service';
 import { CurrencyConversionPipe } from './pipes/currency-conversion.pipe';
+import { SearchPipe } from './pipes/searchPipe';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    CurrencyConversionPipe
+    CurrencyConversionPipe,
+    SearchPipe
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { CurrencyConversionPipe } from './pipes/currency-conversion.pipe';
   providers: [],
   exports : [
     HeaderComponent,
-    CurrencyConversionPipe
+    CurrencyConversionPipe,
+    SearchPipe
   ]
 })
 export class SharedModule { }

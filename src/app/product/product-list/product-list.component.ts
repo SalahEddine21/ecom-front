@@ -45,7 +45,6 @@ export class ProductListComponent implements OnInit {
 
     this.currencyService.currency$.subscribe(() => {
       this.currency = this.currencyService.getCurrency();
-      console.log(this.currency);
     });
   }
 
@@ -90,4 +89,7 @@ export class ProductListComponent implements OnInit {
     }
   }
 
+  handleLayoutChange(event : any){
+    this.layout = event.layout;
+  }
 }

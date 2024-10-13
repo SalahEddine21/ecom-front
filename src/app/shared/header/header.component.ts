@@ -36,7 +36,8 @@ export class HeaderComponent implements OnInit{
       { label: 'MAD (DH)', value: 'MAD' }
     ];
 
-    this.selectedCurrency = this.currencies[0];
+    const currency = this.currencyService.getCurrency();
+    this.selectedCurrency = this.currencies.find(el => el.value == currency.key);
     this.getConversionRates();
   }
 
