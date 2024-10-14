@@ -4,6 +4,7 @@ import { MenuItem } from 'primeng/api';
 import { CurrencyService } from '../services/currency.service';
 import { ExchangeRateResponse } from '../../models/exchangeRateResponse';
 import { Currency } from '../../models/currency';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -52,6 +53,14 @@ export class HeaderComponent implements OnInit{
       this.currencyService.updateCurrency(new Currency(this.selectedCurrency.value, 
         this.conversionRates.rates[this.selectedCurrency.value]
       ));
+    }
+  }
+
+  getImagePath(){
+    if(environment.production){
+      return '/ecom-front/assets/images/';
+    }else{
+      return '../../../assets/images/';
     }
   }
 }

@@ -6,7 +6,7 @@
     <p-menubar [model]="items">
         <ng-template pTemplate="start">
             <div class="logo-and-currency">
-                <img src="../../../assets/images/shopping.png" alt="VIVI ET MARGOT" height="40" class="logo">
+                <img [src]="getImagePath()+'shopping.png'" alt="VIVI ET MARGOT" height="40" class="logo">
             </div>
         </ng-template>
     
