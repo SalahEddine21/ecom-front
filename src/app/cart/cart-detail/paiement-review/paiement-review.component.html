@@ -1,0 +1,32 @@
+<div class="grid flex justify-content-center">
+    <p-card>
+        <ng-template pTemplate="title"> Review Payment </ng-template>
+        <ng-template pTemplate="subtitle"> Your card details </ng-template>
+        <ng-template pTemplate="content">
+            <div class="p-grid p-fluid">
+                <div class="p-col-12 field">
+                    <label>Card holder Name</label>
+                    <input pInputText [value]="paymentData.cardHolderName" readonly />
+                </div>
+                <div class="p-col-12 field">
+                    <label>Number</label>
+                    <input pInputText mask="9999 9999 9999 9999" [value]="paymentData.cardNumber" readonly />
+                </div>
+                <div class="p-col-12 field">
+                    <label>Date</label>
+                    <input pInputText [value]="paymentData.expiryDate" readonly />
+                </div>
+                <div class="p-col-12 field">
+                    <label>CVV</label>
+                    <input pInputText [value]="paymentData.cvv" readonly />
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="grid grid-nogutter justify-content-between">
+                <p-button label="Back" (onClick)="backToPrev()" icon="pi pi-angle-left"></p-button>
+                <p-button label="Confirm" (onClick)="saveCart()" icon="pi pi-angle-right" iconPos="right" styleClass="p-button-success"></p-button>
+            </div>
+        </ng-template>
+    </p-card>
+</div>            

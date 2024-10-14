@@ -1,0 +1,41 @@
+<div class="card">
+    <p-table [value]="products" [tableStyle]="{'width': '100%'}">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                Your products
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Title</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{product.title}}</td>
+                <td><img [src]="product.image" [alt]="product.title" width="100" class="shadow-4 image-resizer" /></td>
+                <td>{{product.price | currencyConversion: currency.rate | currency: currency.key }}</td>
+                <td>{{product.category}}</td>
+                <td>
+                    <div class="quantity-bloc">
+                        <button pButton type="button" icon="pi pi-minus" class="p-button-rounded p-button-secondary quantity-buttons" 
+                            (click)="updateQty(product.id, QUANTITY_UPDATES.DECREASE)" [disabled]="getProductQty(product.id) == 1" ></button>
+                        <span class="quantity" >{{getProductQty(product.id)}}</span>
+                        <button pButton type="button" icon="pi pi-plus" class="p-button-rounded p-button-success quantity-buttons" (click)="updateQty(product.id, QUANTITY_UPDATES.INCREASE)"></button>
+                    </div>
+                </td>
+                <td>
+                    <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger quantity-buttons" (click)="removeProduct(product.id)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<div class="grid grid-nogutter justify-content-end" style="margin-top: 1rem;">
+    <p-button label="Next" (onClick)="goToNextTab()" icon="pi pi-angle-right" iconPos="right"></p-button>
+</div>

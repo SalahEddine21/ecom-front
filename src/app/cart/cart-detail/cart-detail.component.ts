@@ -9,6 +9,8 @@ import { CurrencyPipe } from '@angular/common';
 import { CurrencyService } from '../../shared/services/currency.service';
 import { Currency } from '../../models/currency';
 import { ActivatedRoute } from '@angular/router';
+import { MenuItem } from 'primeng/api';
+import { PaymentCard } from '../../models/payment-card';
 
 @Component({
   selector: 'app-cart-detail',
@@ -17,61 +19,36 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CartDetailComponent implements OnInit{
 
+  items: MenuItem[] | undefined;
   cart : Cart | undefined;
-  products : Product[] = [];
   allProducts : Product[] = [];
-  loadingData : boolean = false;
-  QUANTITY_UPDATES = QUANTITY_UPDATES;
-  currency : Currency;
+  active : number = 0;
+  paymentData! : PaymentCard;
 
-  constructor(private readonly cartService : CartService,
-    private readonly currencyService: CurrencyService,
-    private readonly cdr : ChangeDetectorRef,
-    private readonly route: ActivatedRoute
-  ) {
-    this.currency = this.currencyService.currency;
-  }
+  constructor(private readonly route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.getAllproducts();
-    this.cartService.cart$.subscribe(() => {
-      this.cart = this.cartService.getCart();
-      this.setCartProducts();
-      this.cdr.detectChanges();
-    });
-
-    this.currencyService.currency$.subscribe(() => {
-      this.currency = this.currencyService.getCurrency();
-    });
-  }
-
-
-  getAllproducts(){
     this.allProducts = this.route.snapshot.data['products'];
-    this.setCartProducts();      
-  }
-
-  setCartProducts() {
-    if (this.cart && this.cart.products.length > 0) {
-      let cartProductIds: (Number | undefined)[] = this.cart.products.map(p => p.productId);
-      if (!isNullOrUndefined(cartProductIds)) {
-        this.products = this.allProducts.filter(el => cartProductIds.indexOf(el.id) != NOT_FOUND);
+    this.items = [
+      {
+          label: 'Shopping Cart'
+      },
+      {
+          label: 'Paiement Info'
+      },
+      {
+          label: 'Review'
       }
-    }else{
-      this.products = [];
-    }
+    ];
   }
 
-  getProductQty(productId : Number){
-    let product = this.cart?.products.find(el => el.productId == productId);
-    return product?.quantity;
+  setPayment(payment : PaymentCard){
+    this.paymentData = payment;
+    this.active = 2;
+    console.log(this.paymentData);
   }
 
-  updateQty(productId : Number, updateType : QUANTITY_UPDATES){
-    this.cartService.updateProductQty(productId, updateType);
-  }
-
-  removeProduct(productId : Number){
-    this.cartService.removeFromCart(productId);
+  validateCommand(){
+    // validate user final command here, and re initialise all saved data (carts, products...)
   }
 }

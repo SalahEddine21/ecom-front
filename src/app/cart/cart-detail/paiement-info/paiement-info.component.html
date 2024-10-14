@@ -1,0 +1,50 @@
+<div class="grid flex justify-content-center">
+    <p-card>
+        <ng-template pTemplate="title"> Payment Information </ng-template>
+        <ng-template pTemplate="subtitle"> Enter your personal information </ng-template>
+        <ng-template pTemplate="content">
+            <form [formGroup]="paymentForm" (ngSubmit)="proceedToReview()">
+              <div class="p-fluid formgrid grid">
+                <div class="field col-12">
+                  <label for="cardHolderName">Card holder Name</label>
+                  <input pInputText id="cardHolderName" formControlName="cardHolderName" />
+                  <p-message *ngIf="paymentForm.get('cardHolderName')?.invalid && paymentForm.get('cardHolderName')?.touched"
+                              severity="error" text="Cardholder name is required"></p-message>
+                </div>
+          
+                <div class="field col-8">
+                  <label for="cardNumber">Number</label>
+                  <p-inputMask id="cardNumber" formControlName="cardNumber" mask="9999 9999 9999 9999"></p-inputMask>
+                  <p-message *ngIf="paymentForm.get('cardNumber')?.invalid && paymentForm.get('cardNumber')?.touched"
+                              severity="error" text="Valid card number is required"></p-message>
+                </div>
+          
+                <div class="field col-2">
+                  <label for="expiryDate">Date</label>
+                  <p-inputMask id="expiryDate" formControlName="expiryDate" mask="99/99"></p-inputMask>
+                  <p-message *ngIf="paymentForm.get('expiryDate')?.invalid && paymentForm.get('expiryDate')?.touched"
+                              severity="error" text="Expiry date is required"></p-message>
+                </div>
+          
+                <div class="field col-2">
+                  <label for="cvv">CVV</label>
+                  <p-inputMask id="cvv" formControlName="cvv" mask="999"></p-inputMask>
+                  <p-message *ngIf="paymentForm.get('cvv')?.invalid && paymentForm.get('cvv')?.touched"
+                              severity="error" text="CVV is required"></p-message>
+                </div>
+
+                <div class="field-checkbox col-12">
+                    <p-checkbox id="remember" [binary]="true"></p-checkbox>
+                    <label for="remember" class="p-checkbox-label">Save credit card information for future</label>
+                </div>
+              </div>
+            </form>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="grid grid-nogutter justify-content-between">
+                <p-button label="Back" (onClick)="backToPrev()" icon="pi pi-angle-left"></p-button>
+                <p-button label="Next" (onClick)="proceedToReview()" [disabled]="paymentForm.invalid" icon="pi pi-angle-right" iconPos="right"></p-button>
+            </div>
+        </ng-template>
+    </p-card>
+</div>    
