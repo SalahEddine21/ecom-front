@@ -43,6 +43,7 @@ export class ProductListComponent implements OnInit {
     this.setProductsData();
     this.getCategories();
 
+    // catch currency update to update prices
     this.currencyService.currency$.subscribe(() => {
       this.currency = this.currencyService.getCurrency();
     });

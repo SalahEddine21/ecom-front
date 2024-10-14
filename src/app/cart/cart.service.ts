@@ -28,6 +28,10 @@ export class CartService {
     });
   }
 
+  /**
+   * get current cart value
+   * @returns current cart
+   */
   getCart() : Cart{
     const cartAsString = localStorage.getItem('cart');
     if(cartAsString){
@@ -40,6 +44,10 @@ export class CartService {
     this.cartSubject.next(cart);
   }
 
+  /**
+   * called when the using hit the add product to cart button
+   * @param cartProduct 
+   */
   addProduct(cartProduct : CartProduct){
     const cart = this.getCart();
     let product = cart.products?.find(el => el.productId == cartProduct.productId);
@@ -50,6 +58,11 @@ export class CartService {
     }
   }
 
+  /**
+   * called when the user add/remove quantity's product
+   * @param productId 
+   * @param updateType 
+   */
   updateProductQty(productId : Number, updateType : QUANTITY_UPDATES){
     const cart = this.getCart();
     let product = cart.products.find(product => product.productId == productId);
@@ -61,6 +74,10 @@ export class CartService {
     }
   }
 
+  /**
+   * called when the user remove product from cart
+   * @param productId 
+   */
   removeFromCart(productId: Number): void {
     const cart = this.getCart();
     const product = cart.products.find(product => product.productId == productId);

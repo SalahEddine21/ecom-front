@@ -18,6 +18,7 @@ export class CurrencyService {
     this.currencySubject = new BehaviorSubject<Currency>(this.currency);
     this.currency$ = this.currencySubject.asObservable();
 
+    // event listener to catch currency changes
     window.addEventListener('storage', (event) => {
       if (event.key === 'currency' && event.newValue) {
         let currency = JSON.parse(event.newValue);
@@ -26,11 +27,19 @@ export class CurrencyService {
     });
   }
 
+  /**
+   * function invoked after user change currency in select input
+   * @param currency 
+   */
   updateCurrency(currency : Currency){
     localStorage.setItem('currency', JSON.stringify(currency));
     this.currencySubject.next(currency);
   }
 
+  /**
+   * function to get current currency value
+   * @returns current currency
+   */
   getCurrency() : Currency{
     const currencyString = localStorage.getItem('currency');
     if(currencyString){
@@ -39,6 +48,7 @@ export class CurrencyService {
     return this.currency;
   }
 
+  // get all currencies based on USD
   getConversionRates() : Observable<ExchangeRateResponse>{
     return this.httpClient.get<ExchangeRateResponse>(this.apiUrl);
   }

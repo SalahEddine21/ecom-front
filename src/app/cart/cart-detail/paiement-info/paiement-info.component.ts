@@ -31,6 +31,7 @@ export class PaiementInfoComponent implements OnChanges{
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['paymentData']){
+      // patch the previous value of card to form
       this.paymentForm.patchValue({
         cardNumber: this.paymentData?.cardNumber,
         cardHolderName: this.paymentData?.cardHolderName,

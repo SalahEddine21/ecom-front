@@ -5,6 +5,7 @@ import { CurrencyService } from '../services/currency.service';
 import { ExchangeRateResponse } from '../../models/exchangeRateResponse';
 import { Currency } from '../../models/currency';
 import { environment } from '../../../environments/environment';
+import { CURRENCIES } from '../utils/constantUtils';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,6 @@ export class HeaderComponent implements OnInit{
 
   items: MenuItem[] = [];
   currencies: any[] = [];
-  activeItem: string = '';
   conversionRates : ExchangeRateResponse | undefined;
   selectedCurrency: any;
 
@@ -29,16 +29,11 @@ export class HeaderComponent implements OnInit{
       { label: 'Cart', routerLink: ['/cart/detail'] },
     ];
 
-    this.activeItem = this.router.url;
-
-    this.currencies = [
-      { label: 'USD ($)', value: 'USD' },
-      { label: 'EUR (€)', value: 'EUR' },
-      { label: 'MAD (DH)', value: 'MAD' }
-    ];
+    this.currencies = CURRENCIES;
 
     const currency = this.currencyService.getCurrency();
     this.selectedCurrency = this.currencies.find(el => el.value == currency.key);
+
     this.getConversionRates();
   }
 
@@ -57,10 +52,10 @@ export class HeaderComponent implements OnInit{
   }
 
   getImagePath(){
-    if(environment.production){
-      return '/ecom-front/assets/images/';
-    }else{
-      return '../../../assets/images/';
-    }
+    return '/ecom-front/assets/images/';
+    // if(environment.production){
+    // }else{
+    //   return '../../../assets/images/';
+    // }
   }
 }

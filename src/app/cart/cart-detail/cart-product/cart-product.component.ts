@@ -35,18 +35,21 @@ export class CartProductComponent implements OnInit{
   ngOnInit(): void {
     this.setCartProducts();
 
+    // catch cart update event in other tabs
     this.cartService.cart$.subscribe(() => {
       this.cart = this.cartService.getCart();
       this.setCartProducts();
       this.cdr.detectChanges();
     });
 
+    // catch the currency event changes
     this.currencyService.currency$.subscribe(() => {
       this.currency = this.currencyService.getCurrency();
     });
   }
 
   setCartProducts() {
+    // selecting products added in cart from list of all products
     if (this.cart && this.cart.products.length > 0) {
       let cartProductIds: (Number | undefined)[] = this.cart.products.map(p => p.productId);
       if (!isNullOrUndefined(cartProductIds)) {
